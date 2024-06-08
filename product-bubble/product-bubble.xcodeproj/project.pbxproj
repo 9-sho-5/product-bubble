@@ -19,7 +19,7 @@
 		ED8F62902C146F0800176CA2 /* product_bubbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F628F2C146F0800176CA2 /* product_bubbleUITests.swift */; };
 		ED8F62922C146F0800176CA2 /* product_bubbleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F62912C146F0800176CA2 /* product_bubbleUITestsLaunchTests.swift */; };
 		ED8F629F2C146F6800176CA2 /* ScanCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F629E2C146F6800176CA2 /* ScanCodeViewController.swift */; };
-		ED8F62A22C14781900176CA2 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F62A12C14781900176CA2 /* Env.swift */; };
+		ED8F62A62C147D9D00176CA2 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F62A52C147D9D00176CA2 /* Env.swift */; };
 		F85DF5C6D3AE33AAB221EDE5 /* Pods_product_bubble_product_bubbleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0EAEA7A463E5778641959D /* Pods_product_bubble_product_bubbleUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +64,7 @@
 		ED8F628F2C146F0800176CA2 /* product_bubbleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_bubbleUITests.swift; sourceTree = "<group>"; };
 		ED8F62912C146F0800176CA2 /* product_bubbleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_bubbleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ED8F629E2C146F6800176CA2 /* ScanCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCodeViewController.swift; sourceTree = "<group>"; };
-		ED8F62A12C14781900176CA2 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		ED8F62A52C147D9D00176CA2 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +133,8 @@
 				ED8F626E2C146F0700176CA2 /* AppDelegate.swift */,
 				ED8F62702C146F0700176CA2 /* SceneDelegate.swift */,
 				ED8F62722C146F0700176CA2 /* ViewController.swift */,
-				ED8F62A12C14781900176CA2 /* Env.swift */,
 				ED8F629E2C146F6800176CA2 /* ScanCodeViewController.swift */,
+				ED8F62A52C147D9D00176CA2 /* Env.swift */,
 				ED8F62742C146F0700176CA2 /* Main.storyboard */,
 				ED8F62772C146F0800176CA2 /* Assets.xcassets */,
 				ED8F62792C146F0800176CA2 /* LaunchScreen.storyboard */,
@@ -412,7 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8F62A22C14781900176CA2 /* Env.swift in Sources */,
+				ED8F62A62C147D9D00176CA2 /* Env.swift in Sources */,
 				ED8F62732C146F0700176CA2 /* ViewController.swift in Sources */,
 				ED8F626F2C146F0700176CA2 /* AppDelegate.swift in Sources */,
 				ED8F629F2C146F6800176CA2 /* ScanCodeViewController.swift in Sources */,

@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Info.plistから環境変数を読み取る
-        let apiKey = Env.getAPIKEY()
+        let apiKey = Env.getAPI_KEY()
         print("API Key: \(apiKey)")
         
         // ボタンの作成
