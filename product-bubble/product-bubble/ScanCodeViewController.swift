@@ -13,6 +13,7 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
     
     private var previewLayer: AVCaptureVideoPreviewLayer!
     private var captureSession: AVCaptureSession!
+    private var isBarcodeDetected = false // バーコード認識状態を管理するフラグ
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,7 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard !isBarcodeDetected else { return } // バーコードがすでに認識されている場合は処理をスキップ
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         let visionImage = VisionImage(buffer: sampleBuffer)
         visionImage.orientation = imageOrientation(
@@ -64,7 +66,9 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
             for barcode in barcodes {
                 if let rawValue = barcode.rawValue {
                     print("Barcode value: \(rawValue)")
+                    self.isBarcodeDetected = true // バーコードが認識されたことを記録
                     self.fetchProductInfo(barcode: rawValue)
+                    break // 一つのバーコードが認識されたらループを抜ける
                 }
             }
         }
@@ -90,9 +94,10 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
         }
     }
     
-    // Open Food Facts APIを使用して商品情報を取得
+    // Yahoo!ショッピングAPIを使用して商品情報を取得
     func fetchProductInfo(barcode: String) {
-        let urlString = "https://world.openfoodfacts.org/api/v0/product/\(barcode).json"
+        let apiKey = Env.getAPI_KEY() // 取得したAPIキーをここに入力
+        let urlString = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=\(apiKey)&query=\(barcode)&results=1"
         guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -102,11 +107,15 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
             }
             
             do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let product = json["product"] as? [String: Any] {
-                    print("Product info: \(product)")
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    print("Full JSON response: \(json)")
+                }
+
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(ProductResponse.self, from: data)
+                if let firstProduct = response.hits.first {
                     DispatchQueue.main.async {
-                        self.displayProductInfo(product)
+                        self.displayProductInfo(firstProduct)
                     }
                 } else {
                     print("Product not found")
@@ -120,10 +129,42 @@ class ScanCodeViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
     }
     
     // 商品情報を表示するメソッド
-    func displayProductInfo(_ product: [String: Any]) {
-        let alert = UIAlertController(title: "Product Info", message: product.description, preferredStyle: .alert)
+    func displayProductInfo(_ product: Product) {
+        // 商品情報を取得
+        let genreCategory = product.genreCategory.name
+        let brand = product.brand.name
+        let priceLabel = "\(product.priceLabel.defaultPrice)円"
+        let name = product.name
+        let imageUrl = product.image.medium
+        let price = "\(product.price)円"
+        let url = product.url
+        let seller = product.seller.name
+        let parentGenreCategories = product.parentGenreCategories.map { $0.name }.joined(separator: ", ")
+        
+        // 商品情報を表示
+        let message = """
+        名前: \(name)
+        ジャンル: \(genreCategory)
+        ブランド: \(brand)
+        価格: \(price)
+        販売者: \(seller)
+        URL: \(url)
+        親ジャンル: \(parentGenreCategories)
+        """
+        
+        // アラートを作成
+        let alert = UIAlertController(title: "Product Info", message: message, preferredStyle: .alert)
+        
+        // 画像を追加
+        if let imageUrl = URL(string: imageUrl), let imageData = try? Data(contentsOf: imageUrl), let productImage = UIImage(data: imageData) {
+            let imageView = UIImageView(frame: CGRect(x: 10, y: 220, width: 250, height: 250))
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = productImage
+            alert.view.addSubview(imageView)
+            alert.view.heightAnchor.constraint(equalToConstant: 520).isActive = true
+        }
+        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }
-

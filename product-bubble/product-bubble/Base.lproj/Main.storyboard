@@ -35,10 +35,29 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="sul-Mv-bRu"/>
+                    <connections>
+                        <segue destination="jkj-ZU-bVX" kind="show" id="OsS-ca-KAj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xpu-N9-c0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="947" y="740"/>
+        </scene>
+        <!--Register Products View Controller-->
+        <scene sceneID="uto-C9-HTW">
+            <objects>
+                <viewController id="jkj-ZU-bVX" customClass="RegisterProductsViewController" customModule="product_bubble" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dry-te-pTl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ekT-q8-FHU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nXu-Lt-KYw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CDr-hY-gyl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1839" y="739"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="OFQ-3o-ypd">
@@ -46,6 +65,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="rsJ-1N-4AN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cZv-de-bkr">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
