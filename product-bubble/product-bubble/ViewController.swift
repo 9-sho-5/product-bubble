@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Info.plistから環境変数を読み取る
+        let apiKey = Env.getAPIKEY()
+        print("API Key: \(apiKey)")
+        
         // ボタンの作成
         draggableButton = UIButton(type: .custom)
         draggableButton.frame = CGRect(x: 100, y: 100, width: 100, height: 100)

@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'product-bubble' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod 'GoogleMLKit/BarcodeScanning', '3.2.0'
+
+  # Pods for product-bubble
+
+  target 'product-bubbleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'product-bubbleUITests' do
+    # Pods for testing
+  end
+
+end
